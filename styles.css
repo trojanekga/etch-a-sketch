@@ -1,0 +1,17 @@
+div {
+    background-color: aquamarine;
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.sqGrid {
+    background-color: lightblue;
+    height: 800px;
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+}
+

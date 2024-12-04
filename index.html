@@ -7,24 +7,57 @@
     <title>Etch-a-Sketch</title>
 </head>
 <body>
+    <button class="resizeBtn">Resize Grid</button>
     <div class="sqGrid">
 
     </div>
 </body>
 <script>
     let sqGrid = document.querySelector(".sqGrid");
+    let gridSize = 16;
+    let cellSize = 100 / gridSize;
 
     function createGrid(){
-        for (i = 0; i < 16*16; i++){
+        for (i = 0; i < gridSize * gridSize; i++){
             let newDiv = document.createElement("div")
             sqGrid.appendChild(newDiv);
+            newDiv.style.height = `${cellSize}%`;
+            newDiv.style.width = `${cellSize}%`;
             newDiv.addEventListener("mouseover", function(){
-                this.style.backgroundColor = "red";
+                let x = Math.floor(Math.random() * 256);
+                let y = Math.floor(Math.random() * 256);
+                let z = Math.floor(Math.random() * 256);
+                let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+                this.style.backgroundColor = bgColor;
             })
         }   
     }
 
     createGrid();
+
+    let resizeBtn = document.querySelector(".resizeBtn");
+    resizeBtn.addEventListener("click", function(){
+        let size = prompt("Resize grid up to max of 100");
+        if (size <= 100){
+            console.log("Size of grid input is " + size);
+            gridSize = size;
+            cellSize = 100 / gridSize;
+            removeGrid();
+            createGrid();
+        }
+
+    });
+
+    function removeGrid(){
+        removeAllChildNodes(sqGrid)
+    }
+
+    function removeAllChildNodes(parent){
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
 
 
     
